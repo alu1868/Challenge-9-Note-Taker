@@ -7,12 +7,12 @@ const { isBuffer } = require("util");
 
 
 // Retrieve all notes
-router.get("/notes", (req,res) => {
+router.get("/notes", (req, res) => {
     res.json(notes);
 })
 
 // Post a note
-router.post("/notes", (req,res) => {
+router.post("/notes", (req, res) => {
     const postNote = req.body;
     postNote.id = uuid.v4();
     notes.push(postNote);
@@ -27,7 +27,7 @@ router.post("/notes", (req,res) => {
 });
 
 // Delete a note
-router.delete("/notes/:id", (req,res) => {
+router.delete("/notes/:id", (req, res) => {
     const deleteNote = notes.filter(delNote => delNote.id !==req.params.id)
 
         fs.writeFileSync("./Develop/db/db.json", JSON.stringify(deleteNote), function(err) {
@@ -38,3 +38,5 @@ router.delete("/notes/:id", (req,res) => {
 
     res.json(notes);
 });
+
+module.exports = router;
